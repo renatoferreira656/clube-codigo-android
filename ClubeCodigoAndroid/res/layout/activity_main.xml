@@ -13,11 +13,51 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id_main/main"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id_main/image_view"
-        android:text="@string/tamagotchi_main_feed" />
+        android:layout_alignTop="@+id_main/image_view"
+        android:layout_toRightOf="@+id_main/image_view"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id_main/info_xp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id_main/info_life"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id_main/image_view"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id_main/feed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/tamagotchi_main_feed" />
+
+        <Button
+            android:id="@+id_main/play"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/tamagotchi_main_play" />
+
+        <Button
+            android:id="@+id_main/kill"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/tamagotchi_main_kill" />
+    </LinearLayout>
 
 </RelativeLayout>

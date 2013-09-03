@@ -3,7 +3,10 @@ package br.com.dextra.tamagotchi;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
@@ -20,13 +23,43 @@ public class MainActivity extends Activity {
 		initialize(savedInstanceState);
 		bindButtons();
 
+		updateScreenXp();
+		updateScreenLife();
+
 		ImageView imageDragon = (ImageView) findViewById(R.id_main.image_view);
 		imageDragon.setBackgroundResource(R.drawable.dragon_normal);
 	}
 
 	private void bindButtons() {
-		// TODO Auto-generated method stub
+		findViewById(R.id_main.feed).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				life += 20;
+				updateScreenLife();
+			}
+		});
+		findViewById(R.id_main.play).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				xp += 10;
+				updateScreenXp();
+			}
+		});
+		findViewById(R.id_main.kill).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				life -= 10;
+				updateScreenLife();
+			}
+		});
+	}
 
+	private void updateScreenLife() {
+		((TextView) findViewById(R.id_main.info_life)).setText("LIFE: " + life);
+	}
+
+	private void updateScreenXp() {
+		((TextView) findViewById(R.id_main.info_xp)).setText("XP: " + xp);
 	}
 
 	private void initialize(Bundle savedInstanceState) {

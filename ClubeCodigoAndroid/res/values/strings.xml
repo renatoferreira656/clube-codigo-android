@@ -3,5 +3,7 @@
 
     <string name="app_name">Tamagotchi</string>
     <string name="tamagotchi_main_feed">Feed</string>
+    <string name="tamagotchi_main_play">Play</string>
+    <string name="tamagotchi_main_kill">Kill</string>
 
 </resources>
