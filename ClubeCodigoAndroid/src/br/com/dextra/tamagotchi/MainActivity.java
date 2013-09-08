@@ -2,6 +2,7 @@ package br.com.dextra.tamagotchi;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
 
 	private static final String TAG = MainActivity.class.getSimpleName();
+	private static final int DELAY_ACTION = 2000;
 
 	private int life;
 	private int xp;
@@ -21,7 +23,9 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 
 		initialize(savedInstanceState);
-		bindButtons();
+		bindButtonLife();
+		bindButtonPlay();
+		bindButtonKill();
 
 		updateScreenXp();
 		updateScreenLife();
@@ -36,29 +40,69 @@ public class MainActivity extends Activity {
 		outState.putInt("life", life);
 	}
 
-	private void bindButtons() {
+	private void bindButtonLife() {
 		findViewById(R.id_main.feed).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				life += 20;
-				updateScreenLife();
+
+				disableAllButtons();
 				updateScreenFeedImage();
+
+				delay(DELAY_ACTION, new Runnable() {
+					@Override
+					public void run() {
+						enableAllButtons();
+						updateScreenNormalImage();
+						updateScreenLife();
+					}
+				});
+
 			}
 		});
+
+	}
+
+	private void bindButtonPlay() {
 		findViewById(R.id_main.play).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				xp += 10;
-				updateScreenXp();
+
+				disableAllButtons();
 				updateScreenPlayImage();
+
+				delay(DELAY_ACTION, new Runnable() {
+					@Override
+					public void run() {
+						enableAllButtons();
+						updateScreenNormalImage();
+						updateScreenXp();
+					}
+				});
 			}
 		});
+	}
+
+	private void bindButtonKill() {
 		findViewById(R.id_main.kill).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				life -= 10;
-				updateScreenLife();
+				xp += 10;
+
+				disableAllButtons();
 				updateScreenKillImage();
+
+				delay(DELAY_ACTION, new Runnable() {
+					@Override
+					public void run() {
+						enableAllButtons();
+						updateScreenNormalImage();
+						updateScreenLife();
+						updateScreenXp();
+					}
+				});
 			}
 		});
 	}
@@ -74,6 +118,23 @@ public class MainActivity extends Activity {
 			life = savedInstanceState.getInt("life");
 			xp = savedInstanceState.getInt("xp");
 		}
+	}
+
+	private void enableAllButtons() {
+		findViewById(R.id_main.feed).setEnabled(true);
+		findViewById(R.id_main.kill).setEnabled(true);
+		findViewById(R.id_main.play).setEnabled(true);
+	}
+
+	private void disableAllButtons() {
+		findViewById(R.id_main.feed).setEnabled(false);
+		findViewById(R.id_main.kill).setEnabled(false);
+		findViewById(R.id_main.play).setEnabled(false);
+	}
+
+	private void delay(int delay, Runnable run) {
+		final Handler handler = new Handler();
+		handler.postDelayed(run, delay);
 	}
 
 	private void updateScreenLife() {
