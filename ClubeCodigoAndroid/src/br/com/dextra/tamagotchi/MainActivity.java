@@ -1,5 +1,6 @@
 package br.com.dextra.tamagotchi;
 
+import br.com.dextra.tamagotchi.asynctask.DownloadImageAsyncTask;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +20,9 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		new DownloadImageAsyncTask()
+				.execute("http://www.plugmasters.com.br/downloads/icones/banco-de-icones/flats/flats-dragon.png");
 
 		initialize(savedInstanceState);
 		bindButtons();
