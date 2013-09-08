@@ -8,17 +8,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <ImageView
-        android:id="@+id_main/image_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
     <LinearLayout
+        android:id="@+id_main/linear_layout_values"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id_main/image_view"
-        android:layout_alignTop="@+id_main/image_view"
-        android:layout_toRightOf="@+id_main/image_view"
         android:orientation="vertical" >
 
         <TextView
@@ -26,16 +19,38 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id_main/info_life"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:id="@+id_main/linear_layout_values"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tamagotchi_main_label_life" />
+
+            <ProgressBar
+                android:id="@+id_main/progress_life"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp" />
+        </LinearLayout>
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id_main/image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id_main/linear_layout_values"
+        android:layout_marginTop="20dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id_main/image_view"
+        android:layout_alignParentBottom="true"
         android:orientation="horizontal" >
 
         <Button

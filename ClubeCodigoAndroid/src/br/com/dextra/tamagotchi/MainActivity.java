@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
@@ -111,7 +112,7 @@ public class MainActivity extends Activity {
 		Log.d(TAG, "onCreate -> initialize");
 		if (savedInstanceState == null) {
 			Log.d(TAG + "onCreate -> initialize", "No previous state");
-			life = 0;
+			life = 100;
 			xp = 0;
 		} else {
 			Log.d(TAG + "onCreate -> initialize", "Recovering previous state");
@@ -133,12 +134,11 @@ public class MainActivity extends Activity {
 	}
 
 	private void delay(int delay, Runnable run) {
-		final Handler handler = new Handler();
-		handler.postDelayed(run, delay);
+		new Handler().postDelayed(run, delay);
 	}
 
 	private void updateScreenLife() {
-		((TextView) findViewById(R.id_main.info_life)).setText("LIFE: " + life);
+		((ProgressBar) findViewById(R.id_main.progress_life)).setProgress(life);
 	}
 
 	private void updateScreenXp() {
