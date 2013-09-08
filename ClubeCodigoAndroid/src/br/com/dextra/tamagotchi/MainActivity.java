@@ -26,8 +26,7 @@ public class MainActivity extends Activity {
 		updateScreenXp();
 		updateScreenLife();
 
-		ImageView imageDragon = (ImageView) findViewById(R.id_main.image_view);
-		imageDragon.setBackgroundResource(R.drawable.dragon_normal);
+		updateScreenNormalImage();
 	}
 
 	private void bindButtons() {
@@ -36,6 +35,7 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				life += 20;
 				updateScreenLife();
+				updateScreenFeedImage();
 			}
 		});
 		findViewById(R.id_main.play).setOnClickListener(new OnClickListener() {
@@ -43,6 +43,7 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				xp += 10;
 				updateScreenXp();
+				updateScreenPlayImage();
 			}
 		});
 		findViewById(R.id_main.kill).setOnClickListener(new OnClickListener() {
@@ -50,6 +51,7 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				life -= 10;
 				updateScreenLife();
+				updateScreenKillImage();
 			}
 		});
 	}
@@ -60,6 +62,26 @@ public class MainActivity extends Activity {
 
 	private void updateScreenXp() {
 		((TextView) findViewById(R.id_main.info_xp)).setText("XP: " + xp);
+	}
+
+	private void updateScreenNormalImage() {
+		ImageView imageDragon = (ImageView) findViewById(R.id_main.image_view);
+		imageDragon.setBackgroundResource(R.drawable.dragon_normal);
+	}
+
+	private void updateScreenKillImage() {
+		ImageView imageDragon = (ImageView) findViewById(R.id_main.image_view);
+		imageDragon.setBackgroundResource(R.drawable.dragon_kill);
+	}
+
+	private void updateScreenPlayImage() {
+		ImageView imageDragon = (ImageView) findViewById(R.id_main.image_view);
+		imageDragon.setBackgroundResource(R.drawable.dragon_play);
+	}
+
+	private void updateScreenFeedImage() {
+		ImageView imageDragon = (ImageView) findViewById(R.id_main.image_view);
+		imageDragon.setBackgroundResource(R.drawable.dragon_feed);
 	}
 
 	private void initialize(Bundle savedInstanceState) {

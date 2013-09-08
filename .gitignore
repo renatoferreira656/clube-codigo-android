@@ -19,3 +19,7 @@ local.properties
 .classpath
 .project
 .settings
+
+
+#I dont know what it is
+.DS_Store
