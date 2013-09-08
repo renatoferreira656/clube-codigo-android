@@ -29,6 +29,13 @@ public class MainActivity extends Activity {
 		updateScreenNormalImage();
 	}
 
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		Log.d(TAG, "onSaveInstanceState");
+		outState.putInt("xp", xp);
+		outState.putInt("life", life);
+	}
+
 	private void bindButtons() {
 		findViewById(R.id_main.feed).setOnClickListener(new OnClickListener() {
 			@Override
@@ -54,6 +61,19 @@ public class MainActivity extends Activity {
 				updateScreenKillImage();
 			}
 		});
+	}
+
+	private void initialize(Bundle savedInstanceState) {
+		Log.d(TAG, "onCreate -> initialize");
+		if (savedInstanceState == null) {
+			Log.d(TAG + "onCreate -> initialize", "No previous state");
+			life = 0;
+			xp = 0;
+		} else {
+			Log.d(TAG + "onCreate -> initialize", "Recovering previous state");
+			life = savedInstanceState.getInt("life");
+			xp = savedInstanceState.getInt("xp");
+		}
 	}
 
 	private void updateScreenLife() {
@@ -82,25 +102,5 @@ public class MainActivity extends Activity {
 	private void updateScreenFeedImage() {
 		ImageView imageDragon = (ImageView) findViewById(R.id_main.image_view);
 		imageDragon.setBackgroundResource(R.drawable.dragon_feed);
-	}
-
-	private void initialize(Bundle savedInstanceState) {
-		Log.d(TAG, "onCreate -> initialize");
-		if (savedInstanceState == null) {
-			Log.d(TAG + "onCreate -> initialize", "No previous state");
-			life = 0;
-			xp = 0;
-		} else {
-			Log.d(TAG + "onCreate -> initialize", "Recovering previous state");
-			life = savedInstanceState.getInt("life");
-			xp = savedInstanceState.getInt("xp");
-		}
-	}
-
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		Log.d(TAG, "onSaveInstanceState");
-		outState.putInt("xp", xp);
-		outState.putInt("life", life);
 	}
 }
