@@ -1,15 +1,18 @@
 package br.com.dextra.tamagotchi;
 
-import br.com.dextra.tamagotchi.asynctask.DownloadImageAsyncTask;
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import br.com.dextra.tamagotchi.asynctask.DownloadImageAsyncTask;
+import br.com.dextra.tamagotchi.file.FileHandler;
 
 public class MainActivity extends Activity {
 
@@ -18,6 +21,10 @@ public class MainActivity extends Activity {
 
 	private int life;
 	private int xp;
+
+	private Button buttonFeed;
+	private Button buttonKill;
+	private Button buttonPlay;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +53,7 @@ public class MainActivity extends Activity {
 	}
 
 	private void bindButtonLife() {
-		findViewById(R.id_main.feed).setOnClickListener(new OnClickListener() {
+		buttonFeed.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				life += 20;
@@ -69,7 +76,7 @@ public class MainActivity extends Activity {
 	}
 
 	private void bindButtonPlay() {
-		findViewById(R.id_main.play).setOnClickListener(new OnClickListener() {
+		buttonPlay.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				xp += 10;
@@ -90,7 +97,7 @@ public class MainActivity extends Activity {
 	}
 
 	private void bindButtonKill() {
-		findViewById(R.id_main.kill).setOnClickListener(new OnClickListener() {
+		buttonKill.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				life -= 10;
@@ -123,18 +130,23 @@ public class MainActivity extends Activity {
 			life = savedInstanceState.getInt("life");
 			xp = savedInstanceState.getInt("xp");
 		}
+
+		buttonFeed = (Button) findViewById(R.id_main.feed);
+		buttonKill = (Button) findViewById(R.id_main.kill);
+		buttonPlay = (Button) findViewById(R.id_main.play);
+
 	}
 
 	private void enableAllButtons() {
-		findViewById(R.id_main.feed).setEnabled(true);
-		findViewById(R.id_main.kill).setEnabled(true);
-		findViewById(R.id_main.play).setEnabled(true);
+		buttonFeed.setEnabled(true);
+		buttonKill.setEnabled(true);
+		buttonPlay.setEnabled(true);
 	}
 
 	private void disableAllButtons() {
-		findViewById(R.id_main.feed).setEnabled(false);
-		findViewById(R.id_main.kill).setEnabled(false);
-		findViewById(R.id_main.play).setEnabled(false);
+		buttonFeed.setEnabled(false);
+		buttonKill.setEnabled(false);
+		buttonPlay.setEnabled(false);
 	}
 
 	private void delay(int delay, Runnable run) {
@@ -151,7 +163,8 @@ public class MainActivity extends Activity {
 
 	private void updateScreenNormalImage() {
 		ImageView imageDragon = (ImageView) findViewById(R.id_main.image_view);
-		imageDragon.setBackgroundResource(R.drawable.dragon_normal);
+		Bitmap image = FileHandler.readImageFromFile("flats-dragon.png");
+		imageDragon.setImageBitmap(image);
 	}
 
 	private void updateScreenKillImage() {
