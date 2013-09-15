@@ -1,4 +1,4 @@
-package br.com.dextra.tamagotchi.file;
+package br.com.dextra.tamagotchi.handler;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -42,7 +42,10 @@ public class FileHandler {
 		FileInputStream input = null;
 		try {
 			input = TamagotchiApplication.getContext().openFileInput(filename);
-			return BitmapFactory.decodeStream(input);
+			if(input!=null){
+				return BitmapFactory.decodeStream(input);
+			}
+			return null;
 		} catch (FileNotFoundException e) {
 			Log.e(TAG, "File not found - " + filename, e);
 		} finally {

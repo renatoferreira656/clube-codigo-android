@@ -1,7 +1,6 @@
 package br.com.dextra.tamagotchi;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -12,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import br.com.dextra.tamagotchi.asynctask.DownloadImageAsyncTask;
-import br.com.dextra.tamagotchi.file.FileHandler;
+import br.com.dextra.tamagotchi.handler.FileHandler;
 
 public class MainActivity extends Activity {
 
@@ -31,8 +30,9 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		new DownloadImageAsyncTask()
-				.execute("http://www.plugmasters.com.br/downloads/icones/banco-de-icones/flats/flats-dragon.png");
+		DownloadImageAsyncTask downloadImageAsyncTask = new DownloadImageAsyncTask();
+		downloadImageAsyncTask.execute(TamagotchiApplication.property("dragon_kill"), "dragon_kill.png", TamagotchiApplication.property("dragon_normal"), "dragon_normal.png",
+				TamagotchiApplication.property("dragon_feed"), "dragon_feed.png", TamagotchiApplication.property("dragon_play"), "dragon_play.png");
 
 		initialize(savedInstanceState);
 		bindButtonLife();
@@ -163,22 +163,21 @@ public class MainActivity extends Activity {
 
 	private void updateScreenNormalImage() {
 		ImageView imageDragon = (ImageView) findViewById(R.id_main.image_view);
-		Bitmap image = FileHandler.readImageFromFile("flats-dragon.png");
-		imageDragon.setImageBitmap(image);
+		imageDragon.setImageBitmap(FileHandler.readImageFromFile("dragon_normal.png"));
 	}
 
 	private void updateScreenKillImage() {
 		ImageView imageDragon = (ImageView) findViewById(R.id_main.image_view);
-		imageDragon.setBackgroundResource(R.drawable.dragon_kill);
+		imageDragon.setImageBitmap(FileHandler.readImageFromFile("dragon_kill.png"));
 	}
 
 	private void updateScreenPlayImage() {
 		ImageView imageDragon = (ImageView) findViewById(R.id_main.image_view);
-		imageDragon.setBackgroundResource(R.drawable.dragon_play);
+		imageDragon.setImageBitmap(FileHandler.readImageFromFile("dragon_play.png"));
 	}
 
 	private void updateScreenFeedImage() {
 		ImageView imageDragon = (ImageView) findViewById(R.id_main.image_view);
-		imageDragon.setBackgroundResource(R.drawable.dragon_feed);
+		imageDragon.setImageBitmap(FileHandler.readImageFromFile("dragon_feed.png"));
 	}
 }

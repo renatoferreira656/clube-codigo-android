@@ -14,25 +14,25 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
-import br.com.dextra.tamagotchi.file.FileHandler;
+import br.com.dextra.tamagotchi.handler.FileHandler;
 
 public class DownloadImageAsyncTask extends AsyncTask<String, Void, Void> {
 
-	private static final String TAG = DownloadImageAsyncTask.class
-			.getSimpleName();
+	private static final String TAG = DownloadImageAsyncTask.class.getSimpleName();
 
 	@Override
 	protected Void doInBackground(String... params) {
-		for (String param : params) {
-			downloadImage(param);
+		for (int i = 0; i < params.length; i += 2) {
+			downloadImage(params[i], params[i + 1]);
 		}
 		return null;
 	}
 
-	private Bitmap downloadImage(String url) {
+	private Bitmap downloadImage(String url, String filename) {
 		InputStream stream = null;
 		try {
 			DefaultHttpClient client = new DefaultHttpClient();
+			Log.d(TAG, "Init download: " + url);
 			HttpGet metodo = new HttpGet(url);
 			HttpResponse response = client.execute(metodo);
 
@@ -47,13 +47,12 @@ public class DownloadImageAsyncTask extends AsyncTask<String, Void, Void> {
 					ByteArrayOutputStream bStream = new ByteArrayOutputStream();
 					image.compress(Bitmap.CompressFormat.PNG, 100, bStream);
 
-					String[] split = url.split("/");
-					String filename = split[split.length - 1];
-
 					FileHandler.saveToFile(bStream.toByteArray(), filename);
 
 					return image;
 				}
+			}else{
+				Log.d(TAG, "Cannot download Image erro code:" + status);
 			}
 		} catch (ClientProtocolException e) {
 			Log.e(TAG, "Error downloading image", e);
