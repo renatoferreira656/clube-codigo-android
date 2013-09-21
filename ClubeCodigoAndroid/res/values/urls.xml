@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="property_url_dragon_feed"  >http://www.freeimagehosting.net/newuploads/ew7pe.png</string>
+    <string name="property_url_dragon_kill"  >http://www.freeimagehosting.net/newuploads/hu6vx.png</string>
+    <string name="property_url_dragon_normal">http://www.freeimagehosting.net/newuploads/ez7x6.png</string>
+    <string name="property_url_dragon_play"  >http://www.freeimagehosting.net/newuploads/rvubp.png</string>
+
+</resources>

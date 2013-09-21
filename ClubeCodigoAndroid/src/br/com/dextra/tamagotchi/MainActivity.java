@@ -30,9 +30,9 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		DownloadImageAsyncTask downloadImageAsyncTask = new DownloadImageAsyncTask();
-		downloadImageAsyncTask.execute(TamagotchiApplication.property("dragon_kill"), "dragon_kill.png", TamagotchiApplication.property("dragon_normal"), "dragon_normal.png",
-				TamagotchiApplication.property("dragon_feed"), "dragon_feed.png", TamagotchiApplication.property("dragon_play"), "dragon_play.png");
+		new DownloadImageAsyncTask().execute(TamagotchiApplication.property(R.string.property_url_dragon_kill), "dragon_kill.png",
+				TamagotchiApplication.property(R.string.property_url_dragon_normal), "dragon_normal.png", TamagotchiApplication.property(R.string.property_url_dragon_feed),
+				"dragon_feed.png", TamagotchiApplication.property(R.string.property_url_dragon_play), "dragon_play.png");
 
 		initialize(savedInstanceState);
 		bindButtonLife();
