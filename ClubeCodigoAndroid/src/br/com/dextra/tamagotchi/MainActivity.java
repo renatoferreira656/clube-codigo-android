@@ -19,6 +19,8 @@ public class MainActivity extends Activity {
 	private static final int DELAY_ACTION = 2000;
 
 	private int life;
+	private int maxLife;
+	private int minLife;
 	private int xp;
 
 	private Button buttonFeed;
@@ -30,9 +32,15 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		new DownloadImageAsyncTask().execute(TamagotchiApplication.property(R.string.property_url_dragon_kill), "dragon_kill.png",
-				TamagotchiApplication.property(R.string.property_url_dragon_normal), "dragon_normal.png", TamagotchiApplication.property(R.string.property_url_dragon_feed),
-				"dragon_feed.png", TamagotchiApplication.property(R.string.property_url_dragon_play), "dragon_play.png");
+		new DownloadImageAsyncTask().execute(TamagotchiApplication
+				.property(R.string.property_url_dragon_kill),
+				"dragon_kill.png", TamagotchiApplication
+						.property(R.string.property_url_dragon_normal),
+				"dragon_normal.png", TamagotchiApplication
+						.property(R.string.property_url_dragon_feed),
+				"dragon_feed.png", TamagotchiApplication
+						.property(R.string.property_url_dragon_play),
+				"dragon_play.png");
 
 		initialize(savedInstanceState);
 		bindButtonLife();
@@ -56,7 +64,7 @@ public class MainActivity extends Activity {
 		buttonFeed.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				life += 20;
+				changeLife(20);
 
 				disableAllButtons();
 				updateScreenFeedImage();
@@ -79,7 +87,7 @@ public class MainActivity extends Activity {
 		buttonPlay.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				xp += 10;
+				changeXp(10);
 
 				disableAllButtons();
 				updateScreenPlayImage();
@@ -100,8 +108,8 @@ public class MainActivity extends Activity {
 		buttonKill.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				life -= 10;
-				xp += 10;
+				changeLife(-10);
+				changeXp(10);
 
 				disableAllButtons();
 				updateScreenKillImage();
@@ -117,6 +125,23 @@ public class MainActivity extends Activity {
 				});
 			}
 		});
+	}
+
+	private void changeLife(int delta) {
+		int updated = life + delta;
+
+		if (updated > maxLife) {
+			updated = maxLife;
+		}
+		if (updated < minLife) {
+			updated = minLife;
+		}
+
+		life = updated;
+	}
+
+	private void changeXp(int delta) {
+		xp += delta;
 	}
 
 	private void initialize(Bundle savedInstanceState) {
@@ -135,6 +160,10 @@ public class MainActivity extends Activity {
 		buttonKill = (Button) findViewById(R.id_main.kill);
 		buttonPlay = (Button) findViewById(R.id_main.play);
 
+		maxLife = getResources().getInteger(
+				R.integer.tamagotchi_main_information_life_max);
+		minLife = getResources().getInteger(
+				R.integer.tamagotchi_main_information_life_min);
 	}
 
 	private void enableAllButtons() {
@@ -163,21 +192,25 @@ public class MainActivity extends Activity {
 
 	private void updateScreenNormalImage() {
 		ImageView imageDragon = (ImageView) findViewById(R.id_main.image_view);
-		imageDragon.setImageBitmap(FileHandler.readImageFromFile("dragon_normal.png"));
+		imageDragon.setImageBitmap(FileHandler
+				.readImageFromFile("dragon_normal.png"));
 	}
 
 	private void updateScreenKillImage() {
 		ImageView imageDragon = (ImageView) findViewById(R.id_main.image_view);
-		imageDragon.setImageBitmap(FileHandler.readImageFromFile("dragon_kill.png"));
+		imageDragon.setImageBitmap(FileHandler
+				.readImageFromFile("dragon_kill.png"));
 	}
 
 	private void updateScreenPlayImage() {
 		ImageView imageDragon = (ImageView) findViewById(R.id_main.image_view);
-		imageDragon.setImageBitmap(FileHandler.readImageFromFile("dragon_play.png"));
+		imageDragon.setImageBitmap(FileHandler
+				.readImageFromFile("dragon_play.png"));
 	}
 
 	private void updateScreenFeedImage() {
 		ImageView imageDragon = (ImageView) findViewById(R.id_main.image_view);
-		imageDragon.setImageBitmap(FileHandler.readImageFromFile("dragon_feed.png"));
+		imageDragon.setImageBitmap(FileHandler
+				.readImageFromFile("dragon_feed.png"));
 	}
 }
