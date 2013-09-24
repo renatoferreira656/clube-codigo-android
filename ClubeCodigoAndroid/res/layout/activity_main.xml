@@ -1,12 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/TamagotchiTheme.Main.Container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity" >
+    android:layout_height="match_parent" >
 
     <LinearLayout
         android:id="@+id_main/linear_layout_values"
@@ -21,9 +17,9 @@
 
         <LinearLayout
             android:id="@+id_main/linear_layout_values"
+            style="@style/TamagotchiTheme.Main.Information.Container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:orientation="horizontal" >
 
             <TextView
@@ -33,19 +29,18 @@
 
             <ProgressBar
                 android:id="@+id_main/progress_life"
-                style="@android:style/Widget.ProgressBar.Horizontal"
+                style="@style/TamagotchiTheme.Main.Information.Life"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp" />
+                android:layout_height="match_parent" />
         </LinearLayout>
     </LinearLayout>
 
     <ImageView
         android:id="@+id_main/image_view"
+        style="@style/TamagotchiTheme.Main.Animation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id_main/linear_layout_values"
-        android:layout_marginTop="20dp" />
+        android:layout_below="@+id_main/linear_layout_values" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -55,6 +50,7 @@
 
         <Button
             android:id="@+id_main/feed"
+            style="@style/TamagotchiTheme.Main.Actions.Action"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -62,6 +58,7 @@
 
         <Button
             android:id="@+id_main/play"
+            style="@style/TamagotchiTheme.Main.Actions.Action"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -69,6 +66,7 @@
 
         <Button
             android:id="@+id_main/kill"
+            style="@style/TamagotchiTheme.Main.Actions.Action"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

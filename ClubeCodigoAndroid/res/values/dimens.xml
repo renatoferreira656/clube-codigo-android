@@ -1,7 +1,11 @@
 <resources>
 
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+    <!-- Default -->
+    <dimen name="tamagotchi_default_padding">15dp</dimen>
+
+    <!-- Main -->
+    <dimen name="tamagotchi_main_information_container_margintop">20dp</dimen>
+    <dimen name="tamagotchi_main_information_life_marginleft">10dp</dimen>
+    <dimen name="tamagotchi_main_animation_margintop">20dp</dimen>
 
 </resources>

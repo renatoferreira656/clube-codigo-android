@@ -1,10 +1,10 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
-    <style name="AppBaseTheme" parent="android:Theme.Light">
+    <style name="TamagotchiBaseTheme" parent="android:Theme.Light">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
@@ -13,8 +13,35 @@
     </style>
 
     <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
+    <style name="TamagotchiTheme" parent="TamagotchiBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+
+    <!-- Main -->
+    <style name="TamagotchiTheme.Main"></style>
+
+    <style name="TamagotchiTheme.Main.Container">
+        <item name="android:padding">@dimen/tamagotchi_default_padding</item>
+    </style>
+
+    <style name="TamagotchiTheme.Main.Information"></style>
+
+    <style name="TamagotchiTheme.Main.Information.Container">
+        <item name="android:layout_marginTop">@dimen/tamagotchi_main_information_container_margintop</item>
+    </style>
+
+    <style name="TamagotchiTheme.Main.Information.Life" parent="@android:style/Widget.ProgressBar.Horizontal">
+        <item name="android:layout_marginLeft">@dimen/tamagotchi_main_information_life_marginleft</item>
+    </style>
+
+    <style name="TamagotchiTheme.Main.Animation">
+        <item name="android:layout_marginTop">@dimen/tamagotchi_main_animation_margintop</item>
+    </style>
+
+    <style name="TamagotchiTheme.Main.Actions"></style>
+
+    <style name="TamagotchiTheme.Main.Actions.Action">
+        <item name="android:background">@drawable/button_background</item>
     </style>
 
 </resources>
