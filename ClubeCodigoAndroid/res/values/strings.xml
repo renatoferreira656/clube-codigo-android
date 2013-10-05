@@ -2,9 +2,9 @@
 <resources>
 
     <string name="app_name">Tamagotchi</string>
-    <string name="tamagotchi_main_feed">Feed</string>
-    <string name="tamagotchi_main_play">Play</string>
-    <string name="tamagotchi_main_kill">Kill</string>
+    <string name="tamagotchi_actions_feed">Feed</string>
+    <string name="tamagotchi_actions_play">Play</string>
+    <string name="tamagotchi_actions_kill">Kill</string>
     <string name="tamagotchi_main_label_life">Life:</string>
 
 </resources>

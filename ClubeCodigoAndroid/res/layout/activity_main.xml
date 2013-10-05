@@ -42,35 +42,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id_main/linear_layout_values" />
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id_main/actions_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id_main/feed"
-            style="@style/TamagotchiTheme.Main.Actions.Action"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/tamagotchi_main_feed" />
-
-        <Button
-            android:id="@+id_main/play"
-            style="@style/TamagotchiTheme.Main.Actions.Action"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/tamagotchi_main_play" />
-
-        <Button
-            android:id="@+id_main/kill"
-            style="@style/TamagotchiTheme.Main.Actions.Action"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/tamagotchi_main_kill" />
-    </LinearLayout>
+        android:layout_alignParentBottom="true" >
+    </FrameLayout>
 
 </RelativeLayout>

@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:orientation="horizontal" >
+
+    <Button
+        android:id="@+id_actions/feed"
+        style="@style/TamagotchiTheme.Actions.Action"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/tamagotchi_actions_feed" />
+
+    <Button
+        android:id="@+id_actions/play"
+        style="@style/TamagotchiTheme.Actions.Action"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/tamagotchi_actions_play" />
+
+    <Button
+        android:id="@+id_actions/kill"
+        style="@style/TamagotchiTheme.Actions.Action"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/tamagotchi_actions_kill" />
+
+</LinearLayout>

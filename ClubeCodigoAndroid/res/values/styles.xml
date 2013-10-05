@@ -39,9 +39,10 @@
         <item name="android:layout_marginTop">@dimen/tamagotchi_main_animation_margintop</item>
     </style>
 
-    <style name="TamagotchiTheme.Main.Actions"></style>
+    <!-- Actions -->
+    <style name="TamagotchiTheme.Actions"></style>
 
-    <style name="TamagotchiTheme.Main.Actions.Action">
+    <style name="TamagotchiTheme.Actions.Action">
         <item name="android:background">@drawable/button_background</item>
     </style>
 

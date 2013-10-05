@@ -1,31 +1,24 @@
 package br.com.dextra.tamagotchi;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.os.Handler;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import br.com.dextra.tamagotchi.asynctask.DownloadImageAsyncTask;
+import br.com.dextra.tamagotchi.fragment.ActionsFragment;
 import br.com.dextra.tamagotchi.handler.FileHandler;
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity implements
+		ActionsFragment.OnActionFired {
 
 	private static final String TAG = MainActivity.class.getSimpleName();
-	private static final int DELAY_ACTION = 2000;
 
 	private int life;
 	private int maxLife;
 	private int minLife;
 	private int xp;
-
-	private Button buttonFeed;
-	private Button buttonKill;
-	private Button buttonPlay;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +36,15 @@ public class MainActivity extends Activity {
 				"dragon_play.png");
 
 		initialize(savedInstanceState);
-		bindButtonLife();
-		bindButtonPlay();
-		bindButtonKill();
 
 		updateScreenXp();
 		updateScreenLife();
 
-		updateScreenNormalImage();
+		updateScreenImage(ActionsFragment.ACTION_NONE);
+
+		ActionsFragment fragment = new ActionsFragment();
+		getSupportFragmentManager().beginTransaction()
+				.replace(R.id_main.actions_container, fragment).commit();
 	}
 
 	@Override
@@ -58,90 +52,6 @@ public class MainActivity extends Activity {
 		Log.d(TAG, "onSaveInstanceState");
 		outState.putInt("xp", xp);
 		outState.putInt("life", life);
-	}
-
-	private void bindButtonLife() {
-		buttonFeed.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				changeLife(20);
-
-				disableAllButtons();
-				updateScreenFeedImage();
-
-				delay(DELAY_ACTION, new Runnable() {
-					@Override
-					public void run() {
-						enableAllButtons();
-						updateScreenNormalImage();
-						updateScreenLife();
-					}
-				});
-
-			}
-		});
-
-	}
-
-	private void bindButtonPlay() {
-		buttonPlay.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				changeXp(10);
-
-				disableAllButtons();
-				updateScreenPlayImage();
-
-				delay(DELAY_ACTION, new Runnable() {
-					@Override
-					public void run() {
-						enableAllButtons();
-						updateScreenNormalImage();
-						updateScreenXp();
-					}
-				});
-			}
-		});
-	}
-
-	private void bindButtonKill() {
-		buttonKill.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				changeLife(-10);
-				changeXp(10);
-
-				disableAllButtons();
-				updateScreenKillImage();
-
-				delay(DELAY_ACTION, new Runnable() {
-					@Override
-					public void run() {
-						enableAllButtons();
-						updateScreenNormalImage();
-						updateScreenLife();
-						updateScreenXp();
-					}
-				});
-			}
-		});
-	}
-
-	private void changeLife(int delta) {
-		int updated = life + delta;
-
-		if (updated > maxLife) {
-			updated = maxLife;
-		}
-		if (updated < minLife) {
-			updated = minLife;
-		}
-
-		life = updated;
-	}
-
-	private void changeXp(int delta) {
-		xp += delta;
 	}
 
 	private void initialize(Bundle savedInstanceState) {
@@ -156,37 +66,38 @@ public class MainActivity extends Activity {
 			xp = savedInstanceState.getInt("xp");
 		}
 
-		buttonFeed = (Button) findViewById(R.id_main.feed);
-		buttonKill = (Button) findViewById(R.id_main.kill);
-		buttonPlay = (Button) findViewById(R.id_main.play);
-
 		maxLife = getResources().getInteger(
 				R.integer.tamagotchi_main_information_life_max);
 		minLife = getResources().getInteger(
 				R.integer.tamagotchi_main_information_life_min);
 	}
 
-	private void enableAllButtons() {
-		buttonFeed.setEnabled(true);
-		buttonKill.setEnabled(true);
-		buttonPlay.setEnabled(true);
+	@Override
+	public void changeLife(int delta) {
+		int updated = life + delta;
+
+		if (updated > maxLife) {
+			updated = maxLife;
+		}
+		if (updated < minLife) {
+			updated = minLife;
+		}
+
+		life = updated;
 	}
 
-	private void disableAllButtons() {
-		buttonFeed.setEnabled(false);
-		buttonKill.setEnabled(false);
-		buttonPlay.setEnabled(false);
+	@Override
+	public void changeXp(int delta) {
+		xp += delta;
 	}
 
-	private void delay(int delay, Runnable run) {
-		new Handler().postDelayed(run, delay);
-	}
-
-	private void updateScreenLife() {
+	@Override
+	public void updateScreenLife() {
 		((ProgressBar) findViewById(R.id_main.progress_life)).setProgress(life);
 	}
 
-	private void updateScreenXp() {
+	@Override
+	public void updateScreenXp() {
 		((TextView) findViewById(R.id_main.info_xp)).setText("XP: " + xp);
 	}
 
@@ -212,5 +123,25 @@ public class MainActivity extends Activity {
 		ImageView imageDragon = (ImageView) findViewById(R.id_main.image_view);
 		imageDragon.setImageBitmap(FileHandler
 				.readImageFromFile("dragon_feed.png"));
+	}
+
+	@Override
+	public void updateScreenImage(int action) {
+		if (action == ActionsFragment.ACTION_NONE) {
+			updateScreenNormalImage();
+			return;
+		}
+		if (action == ActionsFragment.ACTION_FEED) {
+			updateScreenFeedImage();
+			return;
+		}
+		if (action == ActionsFragment.ACTION_PLAY) {
+			updateScreenPlayImage();
+			return;
+		}
+		if (action == ActionsFragment.ACTION_KILL) {
+			updateScreenKillImage();
+			return;
+		}
 	}
 }
