@@ -19,16 +19,27 @@ import br.com.dextra.tamagotchi.handler.FileHandler;
 public class DownloadImageAsyncTask extends AsyncTask<String, Void, Void> {
 
 	private static final String TAG = DownloadImageAsyncTask.class.getSimpleName();
+	private AsyncOnCompleteTask callback;
+
+	public DownloadImageAsyncTask(AsyncOnCompleteTask callback) {
+		this.callback = callback;
+	}
 
 	@Override
 	protected Void doInBackground(String... params) {
 		for (int i = 0; i < params.length; i += 2) {
 			downloadImage(params[i], params[i + 1]);
 		}
+		callback.onFinished();
 		return null;
 	}
 
-	private Bitmap downloadImage(String url, String filename) {
+	private void downloadImage(String url, String filename) {
+		if (FileHandler.fileAlreadyStorage(filename)) {
+			Log.d(TAG, "Image already storaged " + filename);
+			return;
+		}
+
 		InputStream stream = null;
 		try {
 			DefaultHttpClient client = new DefaultHttpClient();
@@ -48,10 +59,8 @@ public class DownloadImageAsyncTask extends AsyncTask<String, Void, Void> {
 					image.compress(Bitmap.CompressFormat.PNG, 100, bStream);
 
 					FileHandler.saveToFile(bStream.toByteArray(), filename);
-
-					return image;
 				}
-			}else{
+			} else {
 				Log.d(TAG, "Cannot download Image erro code:" + status);
 			}
 		} catch (ClientProtocolException e) {
@@ -67,8 +76,6 @@ public class DownloadImageAsyncTask extends AsyncTask<String, Void, Void> {
 				}
 			}
 		}
-
-		return null;
 	}
 
 }

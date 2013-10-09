@@ -6,7 +6,6 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import br.com.dextra.tamagotchi.asynctask.DownloadImageAsyncTask;
 import br.com.dextra.tamagotchi.fragment.ActionsFragment;
 import br.com.dextra.tamagotchi.handler.FileHandler;
 
@@ -24,16 +23,6 @@ public class MainActivity extends FragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		new DownloadImageAsyncTask().execute(TamagotchiApplication
-				.property(R.string.property_url_dragon_kill),
-				"dragon_kill.png", TamagotchiApplication
-						.property(R.string.property_url_dragon_normal),
-				"dragon_normal.png", TamagotchiApplication
-						.property(R.string.property_url_dragon_feed),
-				"dragon_feed.png", TamagotchiApplication
-						.property(R.string.property_url_dragon_play),
-				"dragon_play.png");
 
 		initialize(savedInstanceState);
 

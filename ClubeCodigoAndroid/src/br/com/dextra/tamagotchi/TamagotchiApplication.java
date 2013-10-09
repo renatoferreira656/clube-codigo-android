@@ -3,7 +3,7 @@ package br.com.dextra.tamagotchi;
 import android.app.Application;
 import android.content.Context;
 
-public class TamagotchiApplication extends Application {
+public class TamagotchiApplication extends Application  {
 
 	private static TamagotchiApplication application;
 
@@ -20,4 +20,5 @@ public class TamagotchiApplication extends Application {
 	public static String property(int chave) {
 		return application.getString(chave);
 	}
+
 }

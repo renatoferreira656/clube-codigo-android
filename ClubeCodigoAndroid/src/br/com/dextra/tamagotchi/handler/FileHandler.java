@@ -1,5 +1,6 @@
 package br.com.dextra.tamagotchi.handler;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -19,8 +20,7 @@ public class FileHandler {
 		FileOutputStream output = null;
 
 		try {
-			output = TamagotchiApplication.getContext().openFileOutput(
-					filename, Context.MODE_PRIVATE);
+			output = TamagotchiApplication.getContext().openFileOutput(filename, Context.MODE_PRIVATE);
 			output.write(content);
 			Log.d(TAG, "Image saved to file");
 		} catch (FileNotFoundException e) {
@@ -42,7 +42,7 @@ public class FileHandler {
 		FileInputStream input = null;
 		try {
 			input = TamagotchiApplication.getContext().openFileInput(filename);
-			if(input!=null){
+			if (input != null) {
 				return BitmapFactory.decodeStream(input);
 			}
 			return null;
@@ -58,5 +58,13 @@ public class FileHandler {
 			}
 		}
 		return null;
+	}
+
+	public static boolean fileAlreadyStorage(String filename) {
+		File input = TamagotchiApplication.getContext().getFileStreamPath(filename);
+		if (input != null) {
+			return input.exists();
+		}
+		return false;
 	}
 }
