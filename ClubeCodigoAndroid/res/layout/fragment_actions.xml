@@ -1,32 +1,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:orientation="horizontal" >
+    android:layout_height="match_parent"
+    android:layout_alignParentBottom="true" >
 
     <Button
-        android:id="@+id_actions/feed"
+        android:id="@+id/actions_feed"
         style="@style/TamagotchiTheme.Actions.Action"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:text="@string/tamagotchi_actions_feed" />
 
     <Button
-        android:id="@+id_actions/play"
+        android:id="@+id/actions_play"
         style="@style/TamagotchiTheme.Actions.Action"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:text="@string/tamagotchi_actions_play" />
 
     <Button
-        android:id="@+id_actions/kill"
+        android:id="@+id/actions_kill"
         style="@style/TamagotchiTheme.Actions.Action"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:text="@string/tamagotchi_actions_kill" />
 
 </LinearLayout>

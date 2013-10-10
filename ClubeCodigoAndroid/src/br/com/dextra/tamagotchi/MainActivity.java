@@ -33,7 +33,7 @@ public class MainActivity extends FragmentActivity implements
 
 		ActionsFragment fragment = new ActionsFragment();
 		getSupportFragmentManager().beginTransaction()
-				.replace(R.id_main.actions_container, fragment).commit();
+				.replace(R.id.main_actions_container, fragment).commit();
 	}
 
 	@Override
@@ -82,34 +82,34 @@ public class MainActivity extends FragmentActivity implements
 
 	@Override
 	public void updateScreenLife() {
-		((ProgressBar) findViewById(R.id_main.progress_life)).setProgress(life);
+		((ProgressBar) findViewById(R.id.main_progress_life)).setProgress(life);
 	}
 
 	@Override
 	public void updateScreenXp() {
-		((TextView) findViewById(R.id_main.info_xp)).setText("XP: " + xp);
+		((TextView) findViewById(R.id.main_info_xp)).setText("XP: " + xp);
 	}
 
 	private void updateScreenNormalImage() {
-		ImageView imageDragon = (ImageView) findViewById(R.id_main.image_view);
+		ImageView imageDragon = (ImageView) findViewById(R.id.main_image_view);
 		imageDragon.setImageBitmap(FileHandler
 				.readImageFromFile("dragon_normal.png"));
 	}
 
 	private void updateScreenKillImage() {
-		ImageView imageDragon = (ImageView) findViewById(R.id_main.image_view);
+		ImageView imageDragon = (ImageView) findViewById(R.id.main_image_view);
 		imageDragon.setImageBitmap(FileHandler
 				.readImageFromFile("dragon_kill.png"));
 	}
 
 	private void updateScreenPlayImage() {
-		ImageView imageDragon = (ImageView) findViewById(R.id_main.image_view);
+		ImageView imageDragon = (ImageView) findViewById(R.id.main_image_view);
 		imageDragon.setImageBitmap(FileHandler
 				.readImageFromFile("dragon_play.png"));
 	}
 
 	private void updateScreenFeedImage() {
-		ImageView imageDragon = (ImageView) findViewById(R.id_main.image_view);
+		ImageView imageDragon = (ImageView) findViewById(R.id.main_image_view);
 		imageDragon.setImageBitmap(FileHandler
 				.readImageFromFile("dragon_feed.png"));
 	}
